@@ -1,3 +1,6 @@
+## This is an example to extract electrostatic interaction and record on each grid point
+## In this case, MOLARIS was used to run molecular dynamic simulation.
+
 import numpy as np
 import sys
 from multiprocessing import Pool
