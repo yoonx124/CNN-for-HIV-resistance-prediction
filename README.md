@@ -1,6 +1,8 @@
 ## Physics based CNN for HIV drug resistance prediction
 ![Protein](https://cnnproteinhiv.files.wordpress.com/2017/11/biophysics.jpg)
 
+
+
 ### Introduction
 The human immunodeficiency virus (HIV) is a retrovirus that causes Immunodeficiency syndrome (AIDS).  After its first clinical discovery in 1981, it has threatened a large number of the population in the world and more than 30 million people have been infected. Scientists have been doing a lot of research to fight the virus and it is still an active field of research since we still do not have medicine advanced enough to completely cure the disease .
 
@@ -45,21 +47,21 @@ On the other hand, there have been many attempts to predict the resistance by ma
 ## Data Generation and Implementation
 Therefore, it would be useful to develop a prediction model that is based on real physics which is not confined to one drug at a time but also fast enough to find the resistance patterns. To the best of our knowledge, there has not been a machine-learning approach based on real physical interactions other than using simple DNA/amino acid codes.
 
-Our project was inspired from the success of the deep convolutional neural network(CNN). After exhaustive simulation to calculate binding energy for a given drug molecule and mutation, scientists use visualization tools such as the below image to identify and analyze the key interactions for candidate drug molecules in the target protein.
+This project was inspired from the success of the deep convolutional neural network(CNN). After exhaustive simulation to calculate binding energy for a given drug molecule and mutation, scientists use visualization tools such as the below image to identify and analyze the key interactions for candidate drug molecules in the target protein.
 
 ![Ligand_bound](https://cnnproteinhiv.files.wordpress.com/2017/11/drug-design.jpg?w=514&h=363)
 
 Can’t we just use the images like above and try to find a pattern that determines the resistance? Maybe. However, protein structures are too complicated for humans to perceive readily. There are literally thousands of interactions inside the protein. Moreover, we may not even have a large enough memory capacity to remember each observation in 786 different HIV protein structures and derive patterns.
 
-We believe that if CNN is successful and sometimes even better than human for image pattern recognition, it can be also very useful to train the resistance patterns with the protein-drug interaction images.
+I believe that if CNN is successful and sometimes even better than human for image pattern recognition, it can be also very useful to train the resistance patterns with the protein-drug interaction images.
 
-Therefore, we propose a method based on explicit electrostatic interaction between the HIV protease protein and drugs using CNN. The main idea is to make a standard 3D image tensors that implicate the physical interactions. In this problem, we used protein structure with a HIV medicine, saquinavir(SQV) from Protein Data Bank . (PDB code:3D1Y) PDB files contain a x,y,z coordinate and atom type for each atom. Almost all of simulation tools use this file format as a starting point.
+Therefore, I propose a method based on explicit electrostatic interaction between the HIV protease protein and drugs using CNN. The main idea is to make a standard 3D image tensors that implicate the physical interactions. In this problem, I used protein structure with a HIV medicine, saquinavir(SQV) from Protein Data Bank . (PDB code:3D1Y) PDB files contain a x,y,z coordinate and atom type for each atom. Almost all of simulation tools use this file format as a starting point.
 
-We first generate all 786 mutant protein structures and optimized them with steepest descent minimization to adjust the mutated amino acids. Since water molecules are important parts of biological system, we introduce water molecules and run 1ps molecular dynamic simulations. At the end of each simulation, we collect the electrostatic interaction from the entire system to each atom of drug molecules. All these structure optimization and electrostatic interactions were calculated with MOLARIS molecular dynamics package.
+I first generate all 786 mutant protein structures and optimized them with steepest descent minimization to adjust the mutated amino acids. Since water molecules are important parts of biological system, water molecules are introduced and run 1ps molecular dynamic simulations. At the end of each simulation, we collect the electrostatic interaction from the entire system to each atom of drug molecules. All these structure optimization and electrostatic interactions were calculated with MOLARIS molecular dynamics package.
 
 ![Ligand_bound](https://cnnproteinhiv.files.wordpress.com/2017/11/electrostatic.jpg?w=485&h=293)
 
-Until now, what we have is the total electrostatic interaction potential on each atom of the given drug molecule and the coordinate of each atom as shown above.  As mentioned, we want to make a ‘general’ model for prediction. The above example has a drug A  and when we want to predict the resistance for a drug B,  the drug molecule may have different number of atoms and coordinates.
+Until now, what we have is the total electrostatic interaction potential on each atom of the given drug molecule and the coordinate of each atom as shown above.  As mentioned, we want to make a ‘general’ model for prediction. The above example has a drug A and when we want to predict the resistance for a drug B,  the drug molecule may have different number of atoms and coordinates.
 
 One way to standardize the data shape that we could think of was to make a 3D grids box around the binding site. We generate a 3D cubic box that is big enough to cover all possible drug molecules and introduce grid points with 0.5 °A space interval.
 One problem of using grid box is that the coordinates of drug molecules are in continuous space while the grid points represent a prefixed position. Thus, we use each grid point to store information about the nearby atoms using the following function that we devised
@@ -75,9 +77,9 @@ In this way, unlike the machine learning models based on sequence data which nee
 
 ## Training and results
 
-Now we have a  standardized data format as a 3D matrix and generated the data by python scripts from the calculations. HivDB cateogrize the extent of resistance into three classes but in this study, 'intermediate' and 'highly resistant' are treated as one because there are very little data for intermediate. But giving a weight for the loss function will be tried in the future.
+Now we have a standardized data format as a 3D matrix and generated the data by python scripts from the calculations. HivDB cateogrize the extent of resistance into three classes but in this study, 'intermediate' and 'highly resistant' are treated as one because there are very little data for intermediate. But giving a weight for the loss function will be tried in the future.
 
-We built our CNN model using TensorFlow. Since we have 3D matrix, we used ‘conv3d’ module with 5D input format [batch, depth, height, width, channel]. Note that each grid has only one value and, thus, the number of channels in our case is only one. However, ‘electrostatic interactions’ are not the only physical/chemical interactions, though it is one of the most dominating features. Extending the channel will be discussed at the end of this post.
+I built a CNN model using TensorFlow. Since we have 3D matrix, we used ‘conv3d’ module with 5D input format [batch, depth, height, width, channel]. Note that each grid has only one value and, thus, the number of channels in our case is only one. However, ‘electrostatic interactions’ are not the only physical/chemical interactions, though it is one of the most dominating features. Extending the channel will be discussed at the end of this post.
 
 Three convolutional layers and  three fully connected layers shows the best performance for now.
 
