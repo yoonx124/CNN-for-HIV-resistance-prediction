@@ -1,4 +1,5 @@
-### CNN_HIV
-Physics based HIV drug resistance prediction using convolutional neural network
 
 
+dfdfdf
+
+![Protein](https://cnnproteinhiv.files.wordpress.com/2017/11/biophysics.jpg)
