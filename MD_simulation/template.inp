@@ -1,0 +1,8 @@
+./sqv.pdb 
+
+
+aa
+	mutate_res xxx
+end
+
+end

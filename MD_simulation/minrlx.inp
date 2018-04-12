@@ -1,0 +1,94 @@
+./mutated.pdb 
+
+ez
+	pre_enz
+		ionres   8 		#ARG       1.00     5.979    18.926    14.143
+#		ionres  25 		#ASP      -1.00    13.289    28.030    16.669
+		ionres  29 		#ASP      -1.00    22.347    30.899    18.470
+		ionres  30 		#ASP      -1.00    22.051    30.784    13.372
+		ionres  43 		#LYS       1.00    31.168    35.398     7.189
+		ionres  45 		#LYS       1.00    27.517    30.995    11.851
+		ionres  60 		#ASP      -1.00    26.149    38.561     5.964
+		ionres  87 		#ARG       1.00    20.575    34.605    20.999
+		ionres 106 		#LYS       1.00    21.093    38.054    29.528
+		ionres 107 		#ARG       1.00    24.892    29.354    22.627
+		ionres 120 		#GLU      -1.00    22.331    27.709    33.628
+#		ionres 124 		#ASP      -1.00    13.552    25.660    22.283
+		ionres 128 		#ASP      -1.00     7.285    19.093    19.145
+		ionres 129 		#ASP      -1.00     9.457    16.472    22.917
+		ionres 133 		#GLU      -1.00    23.081    17.207    31.445
+
+	end
+
+	relax
+
+		md_parm
+			steep_mini 500
+			temperature 300
+			#nsteps      5000
+
+			langevin_r 30
+			water_r 30
+			constraint_2 3.0
+
+
+			#movie_co all+w
+			#movie_fq 100
+		end
+	end
+
+end
+
+
+
+ez
+
+	pre_enz
+
+		ionres   8 		#ARG       1.00     5.979    18.926    14.143
+#		ionres  25 		#ASP      -1.00    13.289    28.030    16.669
+		ionres  29 		#ASP      -1.00    22.347    30.899    18.470
+		ionres  30 		#ASP      -1.00    22.051    30.784    13.372
+		ionres  43 		#LYS       1.00    31.168    35.398     7.189
+		ionres  45 		#LYS       1.00    27.517    30.995    11.851
+		ionres  60 		#ASP      -1.00    26.149    38.561     5.964
+		ionres  87 		#ARG       1.00    20.575    34.605    20.999
+		ionres 106 		#LYS       1.00    21.093    38.054    29.528
+		ionres 107 		#ARG       1.00    24.892    29.354    22.627
+		ionres 120 		#GLU      -1.00    22.331    27.709    33.628
+#		ionres 124 		#ASP      -1.00    13.552    25.660    22.283
+		ionres 128 		#ASP      -1.00     7.285    19.093    19.145
+		ionres 129 		#ASP      -1.00     9.457    16.472    22.917
+		ionres 133 		#GLU      -1.00    23.081    17.207    31.445
+	end
+
+	ac
+		reg1_res 199
+		rest_out relax.res
+		map_lambda 1
+
+
+		md_parm
+			temperature 300
+			stepsize    0.001
+			nsteps      1000
+
+			#movie_co all+w
+			#movie_fq 10
+		end
+	end
+end
+
+aa
+	rest_in relax.res
+	electro_res_atm 199 30.0 
+	resatom 199
+end
+
+
+
+
+end
+
+
+
