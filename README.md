@@ -83,7 +83,7 @@ Three convolutional layers and  three fully connected layers shows the best perf
 
 ![Ligand_bound](https://cnnproteinhiv.files.wordpress.com/2017/11/training2.jpg)
 
-6-fold cross-validation was performed after shuffling the whole data set. For now,  This project is still at an early stage but the validation accuracy and f1-score is in between 0.65~0.71. Early machine learning studies using protein/dna sequence data acheived 60~80% accuracy so I would say this is a quite optimistic start. 
+6-fold cross-validation was performed after shuffling the whole data set. For now,  This project is still at an early stage but the validation accuracy and f1-score is in between 0.65 and 0.71. Early machine learning studies using protein/dna sequence data acheived 60~80% accuracy so I would say this is a quite optimistic start. 
 
 ## Next plan
-My lab has done several computational chemistry research to directly calculate the resistance (reproducing k_cat/Km kinetics).  Many protein structural approach and machine learning algorithm neglect the importance of the 'state'. For HIV virus, it needs to mutate itself to avoid the interaction with drugs while keeping its own catalytic activity as a protease.  
+My lab has done several computational chemistry research to directly calculate the resistance (reproducing k_cat/Km kinetics).  Many protein structural approach and machine learning algorithm neglect the importance of the 'state'. For HIV virus, it needs to mutate itself to avoid the interaction with drugs while keeping its own catalytic activity as a protease.  Thus, the elctrostatic interaciton between the mutant proteins and the natural substrate are in preparation and will be added to the network.
