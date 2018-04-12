@@ -75,5 +75,15 @@ In this way, unlike the machine learning models based on sequence data which nee
 
 ## Training and results
 
-This project
+Now we have a  standardized data format as a 3D matrix and generated the data by python scripts from the calculations. HivDB cateogrize the extent of resistance into three classes but in this study, 'intermediate' and 'highly resistant' are treated as one because there are very little data for intermediate. But giving a weight for the loss function will be tried in the future.
 
+We built our CNN model using TensorFlow. Since we have 3D matrix, we used ‘conv3d’ module with 5D input format [batch, depth, height, width, channel]. Note that each grid has only one value and, thus, the number of channels in our case is only one. However, ‘electrostatic interactions’ are not the only physical/chemical interactions, though it is one of the most dominating features. Extending the channel will be discussed at the end of this post.
+
+Three convolutional layers and  three fully connected layers shows the best performance for now.
+
+![Ligand_bound](https://cnnproteinhiv.files.wordpress.com/2017/11/training2.jpg)
+
+6-fold cross-validation was performed after shuffling the whole data set. For now,  This project is still at an early stage but the validation accuracy and f1-score is in between 0.65~0.71. Early machine learning studies using protein/dna sequence data acheived 60~80% accuracy so I would say this is a quite optimistic start. 
+
+## Next plan
+My lab has done several computational chemistry research to directly calculate the resistance (reproducing k_cat/Km kinetics).  Many protein structural approach and machine learning algorithm neglect the importance of the 'state'. For HIV virus, it needs to mutate itself to avoid the interaction with drugs while keeping its own catalytic activity as a protease.  
