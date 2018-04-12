@@ -1,4 +1,5 @@
-# Convolutional Neural Network for HIV drug resistance prediction
+# CNN for HIV drug resistance prediction
+## Physics based 
 
 dfdfdf
 
